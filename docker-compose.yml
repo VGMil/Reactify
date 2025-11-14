@@ -1,0 +1,70 @@
+version: '3.8'
+
+services:
+  # Servicio de la Base de Datos MySQL
+  db:
+    image: mysql:8.0
+    container_name: reactify_mysql_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - "3306:3306" # Opcional: para acceder desde tu cliente de DB local
+    volumes:
+      - reactify_db_data:/var/lib/mysql # Persistencia de datos
+      - ./sql:/docker-entrypoint-initdb.d  # <-- ¡AÑADE ESTA LÍNEA!
+    networks:
+      - reactify_network
+
+  # Servicio de phpMyAdmin
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: reactify_phpmyadmin
+    restart: always
+    environment:
+      PMA_HOST: db # Nombre del servicio de la base de datos
+    ports:
+      - "8081:80" # Accesible en http://localhost:8081
+    depends_on:
+      - db
+    networks:
+      - reactify_network
+
+  # Servicio de PHP con Apache
+  app:
+    image: php:8.2-apache
+    container_name: reactify_php_apache
+    restart: always
+    volumes:
+      - ./src:/var/www/html # Monta tu código en el contenedor
+    depends_on:
+      - db
+    networks:
+      - reactify_network
+
+  # Servicio de Nginx (Servidor Web)
+  webserver:
+    image: nginx:latest
+    container_name: reactify_nginx
+    restart: always
+    ports:
+      - "8080:80" # Tu aplicación será accesible en http://localhost:8080
+    volumes:
+      - ./src:/var/www/html # Monta tu código para que Nginx sirva archivos estáticos
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf # Monta tu configuración de Nginx
+    depends_on:
+      - app
+    networks:
+      - reactify_network
+
+# Volúmenes nombrados para persistencia
+volumes:
+  reactify_db_data:
+
+# Redes para que los contenedores se puedan comunicar entre sí
+networks:
+  reactify_network:
+    driver: bridge
