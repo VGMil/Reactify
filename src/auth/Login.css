@@ -5,3 +5,10 @@
     justify-content: center;
     gap: 20px;
 }
+
+.form-field{
+    align-self: flex-start;
+    display: flex;
+    flex-direction: column;;
+    gap: 5px;
+}
