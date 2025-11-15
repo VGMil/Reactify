@@ -1,0 +1,14 @@
+/* --- Variables y Estilos Globales --- */
+:root {
+  --main-color: #007bff;
+  --bg-color: #f4f4f4;
+  --font-color: #333;
+  --font-color-sub: #666;
+  --input-focus: #0056b3;
+}
+
+body {
+  font-family: sans-serif;
+  margin: 2em;
+  background: var(--bg-color);
+}
