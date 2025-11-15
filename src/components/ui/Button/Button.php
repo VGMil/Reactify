@@ -9,6 +9,7 @@ $id = $variables['id'] ?? 'btn-'.$name;
 // Manejamos los atributos booleanos (que no tienen valor)
 $required = !empty($variables['required']) ? 'required' : '';
 $disabled = !empty($variables['disabled']) ? 'disabled' : '';
+$onclick = !empty($variables['onclick']) ? 'onclick="' . htmlspecialchars($variables['onclick']) . '"' : '';
 ?>
 <button
     type="<?= htmlspecialchars($type) ?>"
@@ -17,6 +18,7 @@ $disabled = !empty($variables['disabled']) ? 'disabled' : '';
     id="<?= htmlspecialchars($id) ?>"
     <?= $required ?>
     <?= $disabled ?>
+    <?= $onclick ?>
 >
     <?= $children ?>
 </button>
