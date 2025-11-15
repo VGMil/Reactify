@@ -15,36 +15,12 @@ $options = [
 
 try {
     $pdo = new PDO($dsn, $user, $pass, $options);
-    echo "<p style='color:green;'><strong>¡Conexión a la base de datos exitosa!</strong></p>";
     $stmt = $pdo->query("SELECT 'Hola desde MySQL para el proyecto Reactify!' AS mensaje");
     $row = $stmt->fetch();
-    echo "<p>Mensaje desde la BD: " . htmlspecialchars($row['mensaje']) . "</p>";
 } catch (\PDOException $e) {
     throw new \PDOException($e->getMessage(), (int)$e->getCode());
 }
+
+header("location: auth/Login/Login.php");
 ?>
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./global.css">
-    <?php render_css('ui/InputText'); ?>
-    <title>Document</title>
-</head>
-
-<body>
-
-    <?php
-    echo "<h2>Test de Conexión a MySQL:</h2>";
-    render_component('ui/InputText', [
-        'name' => 'email',
-        'placeholder' => 'tu@email.com',
-        'value' => '',
-        'required' => 'required',
-    ]);
-    ?>
-</body>
-
-</html>
