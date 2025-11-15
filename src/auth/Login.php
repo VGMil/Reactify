@@ -10,6 +10,7 @@ require_once __DIR__ . '/../functions.php';
 
     <!-- Cargar estilos globales y de componentes -->
     <link rel="stylesheet" href="../global.css">
+    <link rel="stylesheet" href="./Login.css">
     <?php render_css('ui/InputText'); ?>
     <?php render_css('ui/Button'); ?>
     <?php render_css('ui/Card'); ?>
@@ -17,12 +18,12 @@ require_once __DIR__ . '/../functions.php';
 </head>
 
 <body>
-
+    
     <?php
     render_component('ui/Card', [
         'children' => function() {
             ?>
-            <form action="auth.php" method="POST">
+            <form action="auth.php" method="POST" class="form">
                 <?php render_component('ui/InputText', [
                     'name' => 'correo',
                     'type' => 'email',
