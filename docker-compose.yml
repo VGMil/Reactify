@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   # Servicio de la Base de Datos MySQL
   db:
@@ -35,7 +33,7 @@ services:
 
   # Servicio de PHP con Apache
   app:
-    image: php:8.2-apache
+    build: ./php
     container_name: reactify_php_apache
     restart: always
     volumes:
