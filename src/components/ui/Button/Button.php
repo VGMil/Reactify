@@ -1,0 +1,22 @@
+<?php
+$type = $variables['type'] ?? 'button';
+$children = $variables['children'] ?? 'Button';
+$variant = ' ' . htmlspecialchars($variables['variant']) ?? '';
+$class = 'btn' . $variant;
+$name = $variables['name'] ?? '';
+$id = $variables['id'] ?? 'btn-'.$name;
+
+// Manejamos los atributos booleanos (que no tienen valor)
+$required = !empty($variables['required']) ? 'required' : '';
+$disabled = !empty($variables['disabled']) ? 'disabled' : '';
+?>
+<button
+    type="<?= htmlspecialchars($type) ?>"
+    class="<?= htmlspecialchars($class) ?>"
+    name="<?= htmlspecialchars($name) ?>"
+    id="<?= htmlspecialchars($id) ?>"
+    <?= $required ?>
+    <?= $disabled ?>
+>
+    <?= $children ?>
+</button>
