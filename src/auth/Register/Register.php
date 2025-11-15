@@ -84,6 +84,7 @@ require_once __DIR__ . '../../../functions.php';
 
             <?php render_component('ui/Button', [
                 'type' => 'submit',
+                'name' => 'registrar',
                 'children' => 'Entrar',
                 'variant' => 'submit'
             ]); ?>
@@ -97,6 +98,7 @@ require_once __DIR__ . '../../../functions.php';
 
             <?php render_component('ui/Button', [
                 'children' => 'Inicia Sesion',
+                'name' => 'iniciarSesion',
                 'variant' => 'submit',
                 'onclick' => "window.location.href = '../Login/Login.php';" // <-- Corrección aquí
             ]); ?>
