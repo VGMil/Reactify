@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Renderiza un componente, pasándole variables de forma segura.
  *
@@ -11,7 +12,7 @@ function render_component(string $component_path, array $variables = []): void
     extract($variables);
 
     // Construye la ruta completa al archivo del componente.
-    $full_path = __DIR__ . '/components/' . $component_path . '.php';
+    $full_path = __DIR__ . '/components/' . $component_path . '/' . basename($component_path) . '.php';
 
     // Incluye el archivo si existe.
     if (file_exists($full_path)) {
@@ -19,4 +20,11 @@ function render_component(string $component_path, array $variables = []): void
     } else {
         echo "<!-- Error: Componente no encontrado en {$full_path} -->";
     }
+}
+
+function render_css(string $component_path): void
+{
+    $css_path = $component_path . '/' . basename($component_path) . '.css';
+    $safe_path = htmlspecialchars($css_path);
+    echo '<link rel="stylesheet" href="./components/' . $safe_path . '">' . "\n";
 }
