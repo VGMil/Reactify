@@ -9,9 +9,15 @@
   --warning: #ffcc00;
   --success: #339900;
 }
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  color: var(--font-color);
+}
 
 body {
-  font-family: sans-serif;
   background: var(--bg-color);
   margin: 0;
   padding: 0;
