@@ -1,7 +1,7 @@
 <?php
 $type = $variables['type'] ?? 'button';
 $children = $variables['children'] ?? 'Button';
-$variant = ' ' . htmlspecialchars($variables['variant']) ?? '';
+$variant = !empty($variables['variant']) ? ' '.$variables['variant'] : '';
 $class = 'btn' . $variant;
 $name = $variables['name'] ?? '';
 $id = $variables['id'] ?? 'btn-'.$name;
