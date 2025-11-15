@@ -21,10 +21,16 @@ function render_component(string $component_path, array $variables = []): void
         echo "<!-- Error: Componente no encontrado en {$full_path} -->";
     }
 }
-
+/**
+ * Renderiza la etiqueta <link> para el CSS de un componente.
+ * Ahora construye una URL válida para el navegador.
+ *
+ * @param string $component_path La ruta al componente desde la carpeta 'components'.
+ */
 function render_css(string $component_path): void
 {
-    $css_path = $component_path . '/' . basename($component_path) . '.css';
-    $safe_path = htmlspecialchars($css_path);
-    echo '<link rel="stylesheet" href="./components/' . $safe_path . '">' . "\n";
+    $url_path = '/components/' . $component_path . '/' . basename($component_path) . '.css';
+    
+    $safe_path = htmlspecialchars($url_path);
+    echo '<link rel="stylesheet" href="' . $safe_path . '">' . "\n";
 }
