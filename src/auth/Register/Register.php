@@ -90,13 +90,13 @@ require_once __DIR__ . '../../../functions.php';
 
             <?php render_component('ui/Text', [
                 'tag' => 'h3',
-                'children' => '¿No tienes una cuenta?',
+                'children' => '¿Ya tienes una cuenta?',
                 'size' => 'small',
                 'variant' => 'muted'
             ]); ?>
 
             <?php render_component('ui/Button', [
-                'children' => 'Registrarse',
+                'children' => 'Inicia Sesion',
                 'variant' => 'submit',
                 'onclick' => "window.location.href = '../Login/Login.php';" // <-- Corrección aquí
             ]); ?>
