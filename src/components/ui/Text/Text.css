@@ -1,0 +1,17 @@
+.text {
+    color: var(--font-color);
+    font-family: sans-serif;
+    line-height: 1.5;
+}
+
+/* --- Variantes de Tamaño --- */
+.text-title { font-size: 2rem; font-weight: bold; }
+.text-subtitle { font-size: 1.2rem; font-weight: 600; }
+.text-body { font-size: 1rem; }
+.text-small { font-size: 0.8rem; }
+
+/* --- Variantes de Estilo --- */
+.text-muted { color: var(--font-color-sub); }
+.text-warning { color: var(--warning); }
+.text-success { color: var(--success); }
+.text-error { color: var(--error)}
