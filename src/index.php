@@ -20,6 +20,7 @@ try {
 } catch (\PDOException $e) {
     throw new \PDOException($e->getMessage(), (int)$e->getCode());
 }
-header("location: auth/Login.php");
+
+header("location: auth/Login/Login.php");
 ?>
 

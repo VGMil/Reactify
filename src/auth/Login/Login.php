@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../functions.php';
+require_once __DIR__ . '../../../functions.php';
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -9,7 +9,7 @@ require_once __DIR__ . '/../functions.php';
     <title>Login - Reactify</title>
 
     <!-- Cargar estilos globales y de componentes -->
-    <link rel="stylesheet" href="../global.css">
+    <link rel="stylesheet" href="../../global.css">
     <link rel="stylesheet" href="./Login.css">
     <?php render_css('ui/InputText'); ?>
     <?php render_css('ui/Button'); ?>
@@ -31,7 +31,7 @@ require_once __DIR__ . '/../functions.php';
                 'tag' => 'h1',
                 'children' => 'Iniciar Sesión'
             ]); ?>
-            
+
             <?php render_component('ui/Text', [
                 'tag' => 'h2',
                 'children' => 'Ingresa tus crendeciales para continuar',
@@ -72,7 +72,22 @@ require_once __DIR__ . '/../functions.php';
             <?php render_component('ui/Button', [
                 'type' => 'submit',
                 'children' => 'Entrar',
-                'variant' => 'submit'
+                'variant' => 'submit',
+                'name' => 'login'
+            ]); ?>
+
+            <?php render_component('ui/Text', [
+                'tag' => 'h3',
+                'children' => '¿No tienes una cuenta?',
+                'size' => 'small',
+                'variant' => 'muted'
+            ]); ?>
+
+            <?php render_component('ui/Button', [
+                'children' => 'Registrarse',
+                'variant' => 'submit',
+                'name' => 'register',
+                'onclick' => "window.location.href = '../Register/Register.php';"
             ]); ?>
 
         </form>
