@@ -16,9 +16,9 @@ Route::post('/register',[AuthController::class, 'handleRegisterPost']);
 Route::get('/dashboard',function(){
     $file_path = __DIR__ . '/home/dashboard/dashboard.php';
     include $file_path;
-});
+}, protected:true);
 
-Route::get('/logout', [AuthController::class,'logout']);
+Route::get('/logout',[AuthController::class,'logout'], protected:true);
 
 
 Route::dispatch();
