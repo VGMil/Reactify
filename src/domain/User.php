@@ -7,7 +7,7 @@ class User
     public string $correo;
     public string $password_hash;
 
-    public function __construct(int $id, string $nombre, string $correo, string $password_hash){
+    public function __construct(?int $id, string $nombre, string $correo, string $password_hash){
         $this->id = $id;
         $this->nombre = $nombre;
         $this->correo = $correo;
@@ -21,13 +21,13 @@ class User
         $password_hash = password_hash($plain_password, PASSWORD_DEFAULT);
 
         // 2. Crear una nueva instancia de User con el hash
-        return new self(id: 0, nombre: $nombre, correo: $correo, password_hash: $password_hash);
+        return new self(id: null, nombre: $nombre, correo: $correo, password_hash: $password_hash);
     }
 
     public function save(): bool
     {
         $mysqli = getDatabaseConnection();
-
+        
         if ($this->id === null) {
             // INSERT para un nuevo usuario
             $sql = "INSERT INTO usuarios (nombre, correo, password_hash) VALUES (?, ?, ?)";
@@ -44,20 +44,8 @@ class User
                 $this->id = $mysqli->insert_id;
             }
             return $result;
-
-        } else {
-            // UPDATE para un usuario existente
-            $sql = "UPDATE usuarios SET nombre = ?, correo = ?, password_hash = ? WHERE id = ?";
-            $stmt = $mysqli->prepare($sql);
-
-            // 'sssi' indica que los 3 primeros son string y el último es integer
-            $stmt->bind_param("sssi", $this->nombre, $this->correo, $this->password_hash, $this->id);
-
-            $result = $stmt->execute();
-            $stmt->close();
-
-            return $result;
         }
+        return false;
     }
 
     public static function findById(int $id): ?self
