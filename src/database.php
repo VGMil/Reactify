@@ -5,20 +5,32 @@
 if ($config === false) {
     die("No se pudo cargar el archivo de configuración .env");
 }
-define("MYSQL_HOST", 'db');
-define("MYSQL_DATABASE", $config["MYSQL_DATABASE"]);
-define("MYSQL_USER", $config["MYSQL_USER"]);
-define("MYSQL_PASSWORD", $config["MYSQL_PASSWORD"]);
 
-$connection = new mysqli(MYSQL_HOST, MYSQL_USER, MYSQL_PASSWORD, MYSQL_DATABASE);
+function getDatabaseConnection(): mysqli
+{
+    // Carga las variables de entorno desde .env
+     $config = loadEnv(__DIR__);
 
-if($connection->connect_error) {
-    error_log("". $connection->connect_error);
-    die("Error de conexion". $connection->connect_error);
-}else{
-    error_log("Conectado con exito a la Base de Datos");
-    $connection->close();
+    if ($config === false) {
+        die("No se pudo cargar el archivo de configuración .env");
+    }
+
+    $host = 'db';
+    $user = $config['MYSQL_USER'];
+    $pass = $config['MYSQL_PASSWORD'];
+    $db   = $config['MYSQL_DATABASE'];
+
+    $mysqli = new mysqli($host, $user, $pass, $db);
+
+    if ($mysqli->connect_error) {
+
+        die("Error de conexión: " . $mysqli->connect_error);
+    }
+
+    // ¡Muy importante! Establecer el charset para evitar problemas con acentos y ñ
+    $mysqli->set_charset("utf8mb4");
+
+    return $mysqli;
 }
-
 
 
