@@ -20,7 +20,8 @@ require_once __DIR__ . '../../../functions.php';
 
 <body>
 
-    <?php
+    <div class="">
+        <?php
     render_component('ui/Card', [
         'children' => function () {
     ?>
@@ -95,6 +96,7 @@ require_once __DIR__ . '../../../functions.php';
         }
     ]);
     ?>
+    </div>
 
 </body>
 

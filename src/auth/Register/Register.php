@@ -19,7 +19,8 @@ require_once __DIR__ . '../../../functions.php';
 </head>
 
 <body>
-
+<div>
+    
     <?php
     render_component('ui/Card', [
         'children' => function () {
@@ -100,7 +101,7 @@ require_once __DIR__ . '../../../functions.php';
                 'children' => 'Inicia Sesion',
                 'name' => 'iniciarSesion',
                 'variant' => 'submit',
-                'onclick' => "window.location.href = '../Login/Login.php';" // <-- Corrección aquí
+                'onclick' => "window.location.href = '/login';" // <-- Corrección aquí
             ]); ?>
 
         </form>
@@ -108,6 +109,7 @@ require_once __DIR__ . '../../../functions.php';
         }
     ]);
     ?>
+</div>
 
 </body>
 
