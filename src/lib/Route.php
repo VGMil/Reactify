@@ -20,8 +20,14 @@ class Route {
             'protected'=>$protected
         ];
     }
-
+    private static function sendNoCacheHeaders() {
+        header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
+        header('Cache-Control: post-check=0, pre-check=0', false);
+        header('Pragma: no-cache');
+        header('Expires: Thu, 19 Nov 1981 08:52:00 GMT'); // Una fecha en el pasado
+    }
     public static function dispatch(){
+        self::sendNoCacheHeaders();
         $uri = $_SERVER['REQUEST_URI'];
         $uri = trim($uri, '/');
 
