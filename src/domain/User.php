@@ -2,7 +2,7 @@
 
 class User
 {
-    private ?int $id;
+    public ?int $id;
     public string $nombre;
     public string $correo;
     public string $password_hash;

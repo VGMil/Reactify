@@ -2,6 +2,7 @@
 namespace Src\Auth;
 
 include_once "./domain/User.php";
+use Lib\Session;
 
 use Error;
 use User;
@@ -10,24 +11,32 @@ class AuthController
 {
     public static function showLoginForm()
     { /* ... lógica para mostrar el formulario ... */
+        Session::get("login_error");
         $file_path = __DIR__ . '/Login/Login.php';
         include $file_path;
     }
     public static function handleLoginPost()
     { 
-        $data = $_POST;
-        if(!empty($data['password']) && !empty($data['correo'])){
-            $user = User::findByCorreo($data['correo']);
-            if($user && $user->verifyPassword($data['password'])){
-                // TODO: Iniciar sesión
+        $correo = trim($_POST['correo'] ?? '');
+        $password = trim($_POST['password'] ?? '');
+        if(!empty($password) && !empty($correo)){
+            $user = User::findByCorreo($correo);
+            if($user && $user->verifyPassword($password)){
+                Session::set('user', [
+                    'id' => $user->id,
+                    'nombre' => $user->nombre,
+                    'correo' => $user->correo
+                ]);
                 error_log("Login exitoso. Bienvenido, " . htmlspecialchars($user->nombre));
                 header('Location: /dashboard'); // Redirigir después del login
                 exit();
             } else {
+                Session::flash('login_error', 'Credenciales inválidas.');
                 error_log("Credenciales invalidas");
                 self::showLoginForm();
             }
         } else {
+            Session::flash('login_error', 'Por favor, completa todos los campos.');
             error_log("Campos vacíos") ;
             error_log("Por favor, completa todos los campos.");
             self::showLoginForm();
@@ -36,6 +45,7 @@ class AuthController
 
     public static function showRegisterForm()
     { 
+        Session::get("register_error");
         $file_path = __DIR__ . '/Register/Register.php';
         include $file_path;
     }
@@ -48,7 +58,7 @@ class AuthController
 
         //Validación básica en el lado del servidor
         if (empty($nombre) || empty($correo) || empty($password)) {
-            
+            Session::flash('register_error', 'Todos los campos son obligatorios.');
             error_log("Error de registro: Todos los campos son obligatorios.");
             self::showRegisterForm(); // Mostrar el formulario de nuevo
             return;
@@ -56,6 +66,7 @@ class AuthController
 
         //Validar que el correo sea válido
         if (!filter_var($correo, FILTER_VALIDATE_EMAIL)) {
+            Session::flash('register_error', 'El formato del correo electrónico no es válido.');
             error_log("Error de registro: El formato del correo electrónico no es válido.");
             self::showRegisterForm();
             return;
@@ -63,6 +74,7 @@ class AuthController
 
         //Verificar si el correo ya está registrado
         if (User::findByCorreo($correo)) {
+            Session::flash('register_error', 'El correo electrónico ya está en uso.');
             error_log("Error de registro: El correo electrónico ya está en uso.");
             self::showRegisterForm();
             return;
@@ -78,23 +90,29 @@ class AuthController
             
             //Guardar el usuario en la base de datos
             if ($newUser->save()) {
-                // Registro exitoso. Redirigir al login con un mensaje de éxito.
+                Session::flash('registered', '¡Usuario registrado correctamente! Ahora puedes iniciar sesión.');
                 error_log("Éxito: Usuario registrado correctamente.");
                 header('Location: /login');
                 exit();
             } else {
+                Session::flash('register_error', 'Ocurrió un error al registrar el usuario.');
                 error_log("Error de registro: No se pudo guardar el usuario en la base de datos.");
                 self::showRegisterForm();
             }
 
         } catch (Error $e) {
             // Capturar cualquier error inesperado durante la creación/ guardado
+            Session::flash('register_error', $e->getMessage());
             error_log("Error de registro: " . $e->getMessage());
             self::showRegisterForm();
         }
     }
 
-    public static function logout()
-    { /* ... ... */
+    public static function logout(){ 
+        Session::destroy();
+        header('Location: /login');
+        Session::flash('logout', 'Se ha cerrado Sesion');
+        exit();
     }
+
 }
