@@ -14,17 +14,22 @@ class AuthController
     public static function handleLoginPost()
     { 
         $data = $_POST;
-        if($data['password'] != '' && $data['correo'] != ''){
+        if(!empty($data['password']) && !empty($data['correo'])){
             $user = User::findByCorreo($data['correo']);
-            if($user){
-                // TODO:Session
-                print_r($user);
-            }else{
+            if($user && $user->verifyPassword($data['password'])){
+                // TODO: Iniciar sesión
+                error_log("Login exitoso. Bienvenido, " . htmlspecialchars($user->nombre));
+                header('Location: /dashboard'); // Redirigir después del login
+                return;
+            } else {
+                error_log("Credenciales invalidas");
                 self::showLoginForm();
             }
+        } else {
+            error_log("Campos vacíos") ;
+            error_log("Por favor, completa todos los campos.");
+            self::showLoginForm();
         }
-            
-        
     }
 
     public static function showRegisterForm()
