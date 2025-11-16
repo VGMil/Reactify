@@ -25,7 +25,7 @@ require_once __DIR__ . '../../../functions.php';
     render_component('ui/Card', [
         'children' => function () {
     ?>
-        <form action="auth.php" method="POST" class="form">
+        <form action="/register" method="POST" class="form">
 
 
             <?php render_component('ui/Text', [
