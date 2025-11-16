@@ -38,6 +38,8 @@ services:
     restart: always
     volumes:
       - ./src:/var/www/html # Monta tu código en el contenedor
+      - ./.env:/var/www/html/.env # <-- ¡AÑADE ESTA LÍNEA!
+
     depends_on:
       - db
     networks:

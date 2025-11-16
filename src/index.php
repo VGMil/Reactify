@@ -1,6 +1,7 @@
 <?php 
-
+require_once __DIR__ . '/load_env.php';
 require_once './lib/Route.php';
+require_once './database.php';
 use Lib\Route;
 
 Route::get('/', function () {
