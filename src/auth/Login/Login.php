@@ -10,7 +10,7 @@ require_once __DIR__ . '../../../functions.php';
 
     <!-- Cargar estilos globales y de componentes -->
     <link rel="stylesheet" href="../../global.css">
-    <link rel="stylesheet" href="./Login.css">
+    <link rel="stylesheet" href="./auth/Login/Login.css">
     <?php render_css('ui/InputText'); ?>
     <?php render_css('ui/Button'); ?>
     <?php render_css('ui/Card'); ?>
@@ -87,7 +87,7 @@ require_once __DIR__ . '../../../functions.php';
                 'children' => 'Registrarse',
                 'variant' => 'submit',
                 'name' => 'register',
-                'onclick' => "window.location.href = '../Register/Register.php';"
+                'onclick' => "window.location.href = '/register';"
             ]); ?>
 
         </form>

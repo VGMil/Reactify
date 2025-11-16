@@ -10,7 +10,7 @@ require_once __DIR__ . '../../../functions.php';
 
     <!-- Cargar estilos globales y de componentes -->
     <link rel="stylesheet" href="../../global.css">
-    <link rel="stylesheet" href="./Register.css">
+    <link rel="stylesheet" href="./auth/Register/Register.css">
     <?php render_css('ui/InputText'); ?>
     <?php render_css('ui/Button'); ?>
     <?php render_css('ui/Card'); ?>
