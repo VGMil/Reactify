@@ -13,7 +13,6 @@ class Route {
     public static function dispatch(){
         $uri = $_SERVER['REQUEST_URI'];
         $uri = trim($uri, '/');
-        echo $uri;
 
         $method = $_SERVER['REQUEST_METHOD'];
         foreach (self::$routes[$method] as $route => $callback) {
