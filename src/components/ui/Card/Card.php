@@ -10,4 +10,4 @@
             echo $children;
         }
         ?>
-</div
+</div>
