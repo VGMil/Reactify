@@ -8,6 +8,10 @@ Entorno de desarrollo web, construido con Docker, que incluye un stack LEMP (Lin
 -   **Stack LEMP**: Utiliza Nginx como servidor web, PHP 8.2 con Apache para la lógica de backend y MySQL 8.0 para la base de datos.
 -   **Base de Datos Pre-configurada**: La base de datos se inicializa automáticamente con una tabla de `usuarios` y un dataset de ejemplo para facilitar las pruebas.
 -   **phpMyAdmin**: Incluye phpMyAdmin para una gestión gráfica y sencilla de la base de datos.
+-   **Componentes de UI Reutilizables**: Un sistema simple para crear y renderizar componentes de interfaz de usuario como Card y Button.
+-   **Sistema de Enrutamiento**: Un enrutador propio que soporta métodos GET y POST, con capacidad para proteger rutas específicas.
+-   **Configuración Centralizada**: Uso de variables de entorno (.env) para gestionar credenciales y configuración sensible.
+-   **Gestión de Sesiones Segura**: Un sistema centralizado para manejar el estado del usuario, login, logout.
 
 ## 🛠️ Stack Tecnológico
 
@@ -63,16 +67,33 @@ Para probar el sistema de autenticación, puedes usar las siguientes credenciale
 
 ## 📁 Estructura del Proyecto Actualmente
 ```
-reactify/
-├── docker-compose.yml # Archivo de orquestación de Docker
-├── .env # Variables de entorno (credenciales, etc.)
-├── nginx/
-│ └── default.conf # Configuración del servidor Nginx
-├── sql/
-│ ├── 01-create-users-table.sql # Script para crear la tabla de usuarios
-│ └── 02-insert-users.sql # Script para insertar datos de ejemplo
-└── src/
-└── index.php # Punto de entrada
+Reactify/
+├── src/
+│   ├── auth/             # Controladores de autenticación
+│   │   ├── Login/        # Formulario de Login
+│   │   ├── Register/     # Formulario de Register
+│   │   └── auth.php      # AuthController
+│   ├── domain/           # Modelos de datos (lógica de negocio)
+│   │   └── User.php      # Modelo User
+│   ├── home/             # Vistas de la aplicación principal
+│   │   └── dashboard/    # Vista de Dashboard
+│   ├── lib/              # Librerías y clases centrales
+│   │   ├── Route.php     # Sistema de enrutamiento
+│   │   └── Session.php    # Gestor de sesiones
+│   ├── ui/               # Componentes de UI reutilizables
+│   │   ├── Button.php
+│   │   ├── Card.php
+│   │   └── Text.php
+│   ├── database.php      # Conexión a la base de datos
+│   ├── index.php         # Punto de entrada de la aplicación
+│   ├── load_env.php      # Cargador de variables de entorno
+│   └── .env              # Archivo de configuración (no versionado)
+├── sql/                  # Scripts de base de datos
+│   ├── 01-create-table.sql
+│   └── 02-insert-users.sql
+├── docker-compose.yml    # Configuración de Docker
+├── Dockerfile            # Configuración del contenedor PHP
+└── README.md             # Este archivo
 ```
 
 ## 🛠️ Comandos Útiles
