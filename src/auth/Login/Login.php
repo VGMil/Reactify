@@ -1,6 +1,3 @@
-<?php
-require_once __DIR__ . '../../../functions.php';
-?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -15,6 +12,7 @@ require_once __DIR__ . '../../../functions.php';
     <?php render_css('ui/Button'); ?>
     <?php render_css('ui/Card'); ?>
     <?php render_css('ui/Text'); ?>
+    <?php render_css('ui/Toast'); ?>
 
 </head>
 
@@ -97,7 +95,7 @@ require_once __DIR__ . '../../../functions.php';
     ]);
     ?>
     </div>
-
+    
 </body>
 
 </html>

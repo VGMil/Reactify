@@ -3,6 +3,7 @@ require_once __DIR__ . '/load_env.php';
 require_once './lib/Route.php';
 require_once './database.php';
 require_once './auth/auth.php';
+require_once './functions.php';
 include_once "./lib/Session.php";
 use Src\Auth\AuthController;
 use Lib\Route;
