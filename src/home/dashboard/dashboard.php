@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="./global.css">
     <link rel="stylesheet" href="./home/dashboard/dashboard.css">
     <?php render_css('ui/Card'); ?>
+    <?php render_css('ui/Button'); ?>
     <title>Dashboard</title>
 </head>
 
@@ -19,7 +20,16 @@
             <?php render_component('ui/Card', [
                 'children' => function () {
             ?>
-                    <h3>Sidebar</h3>
+                <div class="sidebar-wrapper"></div>
+                    <?php render_component('ui/Button', [
+                        'type'=> 'button',
+                        'children'=> 'Cerrar Sesion',
+                        'variant'=> 'danger',
+                        'name'=> 'logout',
+                        'fullWidth'=>true,
+                        'onclick'=> "window.location.href = '/logout';",
+                    ] );
+                    ?>
             <?php
                 }
             ]);

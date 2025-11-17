@@ -1,6 +1,6 @@
 .btn {
     display: block;
-    width: 120px;
+    /* width: 120px; */
     height: 40px;
     border-radius: 5px;
     border: 2px solid var(--main-color);
@@ -23,6 +23,13 @@
     border: 2px solid var(--bg-color);
     background-color: var(--main-color);
     color: var(--bg-color);
+}
+
+.btn.danger{
+    border: 2px solid var(--bg-color);
+    background-color: var(--error);
+    color: var(--font-color);
+    box-shadow: 4px 4px var(--error);
 }
 
 .btn.submit:active{
