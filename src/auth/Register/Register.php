@@ -15,7 +15,7 @@ require_once __DIR__ . '../../../functions.php';
     <?php render_css('ui/Button'); ?>
     <?php render_css('ui/Card'); ?>
     <?php render_css('ui/Text'); ?>
-
+    <?php render_css('ui/Toast'); ?>
 </head>
 
 <body>

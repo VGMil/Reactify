@@ -10,10 +10,21 @@ use User;
 class AuthController
 {
     public static function showLoginForm()
-    { /* ... lógica para mostrar el formulario ... */
-        Session::get("login_error");
+    { 
         $file_path = __DIR__ . '/Login/Login.php';
         include $file_path;
+        $error = '';
+        if(Session::has('_flash.login_error')) {
+            $error = Session::getFlash('login_error');
+        }else if(Session::has('_flash.logout')){
+            $error = Session::getFlash('logout');
+        }
+        if($error !== ' ' || $error!== null){
+            render_component("ui/Toast", [
+            "children"=> $error,
+            "variant"=> 'error'
+            ]);
+        }
     }
     public static function handleLoginPost()
     { 
@@ -45,9 +56,14 @@ class AuthController
 
     public static function showRegisterForm()
     { 
-        Session::get("register_error");
         $file_path = __DIR__ . '/Register/Register.php';
         include $file_path;
+        if(Session::has('_flash.register_error')) {
+            render_component("ui/Toast", [
+            "children"=> Session::getFlash("register_error"),
+            "variant"=> 'error'
+            ]);
+        }
     }
   public static function handleRegisterPost()
     { 
@@ -110,8 +126,8 @@ class AuthController
 
     public static function logout(){ 
         Session::destroy();
-        header('Location: /login');
         Session::flash('logout', 'Se ha cerrado Sesion');
+        header('Location: /login');
         exit();
     }
 
