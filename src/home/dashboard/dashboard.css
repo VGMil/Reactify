@@ -36,6 +36,10 @@
     
 }
 
+.sidebar-wrapper{
+    flex-grow: 1;
+}
+
 .footer {
     grid-area: footer;
 }
